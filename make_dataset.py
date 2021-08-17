@@ -54,7 +54,7 @@ for path in path_sets:
         for filename in files:
             if filename.endswith(".jpg") :
                 img_paths.append(os.path.join(root, filename))
-                print(os.path.join(root, filename))
+                #print(os.path.join(root, filename))
 
 for idx, img_path in enumerate(img_paths):
     print(idx, img_path)
