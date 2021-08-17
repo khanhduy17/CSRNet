@@ -47,21 +47,18 @@ def gaussian_filter_density(gt):
 
 root = '../FaceMaskProject/'
 path_sets = ['../FaceMaskProject/dataset']
-print(path_sets)
 
 img_paths = []
 for path in path_sets:
-    print(path)
     for root, _, files in os.walk(path):
-        print(root)
         for filename in files:
             print(filename)
             if filename.endswith(".jpg") :
                 img_paths.append(os.path.join(root, filename))
                 print(os.path.join(root, filename))
 
-for img_path in img_paths:
-    print(img_path)
+for idx, img_path in enumerate(img_paths):
+    print(idx, img_path)
     if os.path.exists(img_path.replace('.jpg','.h5').replace('images','ground_truth')):
         continue
         #os.remove(img_path.replace('.jpg','.h5').replace('images','ground_truth'))
