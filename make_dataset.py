@@ -52,7 +52,6 @@ img_paths = []
 for path in path_sets:
     for root, _, files in os.walk(path):
         for filename in files:
-            print(filename)
             if filename.endswith(".jpg") :
                 img_paths.append(os.path.join(root, filename))
                 print(os.path.join(root, filename))
