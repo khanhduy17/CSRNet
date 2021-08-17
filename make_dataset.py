@@ -51,7 +51,9 @@ print(path_sets)
 
 img_paths = []
 for path in path_sets:
+    print(path)
     for root, _, files in os.walk(path):
+        print(root)
         for filename in files:
             print(filename)
             if filename.endswith(".jpg") :
