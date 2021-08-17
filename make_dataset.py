@@ -45,8 +45,8 @@ def gaussian_filter_density(gt):
     print ('done.')
     return density
 
-root = '~/FaceMaskProject/'
-path_sets = ['~/FaceMaskProject/dataset/images']
+root = '../FaceMaskProject/'
+path_sets = ['../FaceMaskProject/dataset']
 print(path_sets)
 
 img_paths = []
