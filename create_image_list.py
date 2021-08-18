@@ -22,7 +22,7 @@ result_filename = 'image_list.txt'
 with open(result_filename, 'w') as result_file:
     for img_path in img_paths:
         print(img_path)
-        result_file.write('{}\n'.format(img_path))
+        result_file.write(img_path)
 
 
 
