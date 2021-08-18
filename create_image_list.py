@@ -15,6 +15,7 @@ for path in path_sets:
                 if not os.path.exists(img_path.replace('.jpg','.mat').replace('images','ground_truth')):
                     continue
                 img_paths.append(os.path.join(root, filename))
+                print(filename)
                 
 result_filename = 'image_list.txt'
 with open(result_filename, 'w') as result_file:
