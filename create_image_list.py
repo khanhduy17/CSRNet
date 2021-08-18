@@ -16,13 +16,12 @@ for path in path_sets:
                 if not os.path.exists(img_path.replace('.jpg','.mat').replace('images','ground_truth')):
                     continue
                 img_paths.append(img_path)
-                print(filename)
                 
 result_filename = 'image_list.txt'
 with open(result_filename, 'w') as result_file:
     for img_path in img_paths:
         print(img_path)
-        result_file.write(img_path)
+        result_file.write(img_path+'\n')
 
 
 
