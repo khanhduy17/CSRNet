@@ -10,11 +10,12 @@ for path in path_sets:
     for root, _, files in os.walk(path):
         for filename in files:
             if filename.endswith(".jpg") :
+                img_path = os.path.join(root, filename)
                 if os.path.exists(img_path.replace('.jpg','.h5').replace('images','ground_truth')):
                     continue
                 if not os.path.exists(img_path.replace('.jpg','.mat').replace('images','ground_truth')):
                     continue
-                img_paths.append(os.path.join(root, filename))
+                img_paths.append(img_path)
                 print(filename)
                 
 result_filename = 'image_list.txt'
