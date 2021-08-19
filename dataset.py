@@ -30,7 +30,7 @@ class listDataset(Dataset):
         
         img_path = self.lines[index]
         #img_path = img_path.replace("/home/leeyh/Downloads/Shanghai","/content/drive/MyDrive/CSRNet")
-        img_path = '/content/drive/MyDrive/CSRNet/CSR_Data/images/' + img_path
+        img_path = '../FaceMaskProject/dataset/images/' + img_path
         img,target = load_data(img_path,self.train)
         
         #img = 255.0 * F.to_tensor(img)
