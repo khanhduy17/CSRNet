@@ -30,8 +30,8 @@ parser.add_argument('test_json', metavar='TEST',
 parser.add_argument('--pre', '-p', metavar='PRETRAINED', default=None,type=str,
                     help='path to the pretrained model')
 
-parser.add_argument('gpu',metavar='GPU', type=str,
-                    help='GPU id to use.')
+#parser.add_argument('gpu',metavar='GPU', type=str,
+#                    help='GPU id to use.')
 
 parser.add_argument('task',metavar='TASK', type=str,
                     help='task id to use.')
@@ -67,7 +67,9 @@ def main():
         val_list = f.readlines()
     val_list = [l.strip('\n\r') for l in val_list]
     
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    #os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    os.environ['CUDA_VISIBLE_DEVICES'] = [0,1,2,3]
+    
     torch.cuda.manual_seed(args.seed)
     
     model = CSRNet()
