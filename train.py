@@ -68,7 +68,7 @@ def main():
     val_list = [l.strip('\n\r') for l in val_list]
     
     #os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-    os.environ['CUDA_VISIBLE_DEVICES'] = [0,1,2,3]
+    os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3"
     
     torch.cuda.manual_seed(args.seed)
     
