@@ -30,8 +30,8 @@ parser.add_argument('test_json', metavar='TEST',
 parser.add_argument('--pre', '-p', metavar='PRETRAINED', default=None,type=str,
                     help='path to the pretrained model')
 
-#parser.add_argument('gpu',metavar='GPU', type=str,
-#                    help='GPU id to use.')
+parser.add_argument('gpu',metavar='GPU', type=str,
+                    help='GPU id to use.')
 
 parser.add_argument('task',metavar='TASK', type=str,
                     help='task id to use.')
@@ -45,8 +45,8 @@ def main():
     args = parser.parse_args()
     args.original_lr = 1e-7
     args.lr = 1e-7
-    #args.batch_size    = 1
-    args.batch_size    = 4
+    args.batch_size    = 1
+    #args.batch_size    = 4
     args.momentum      = 0.95
     args.decay         = 5*1e-4
     args.start_epoch   = 0
@@ -67,13 +67,13 @@ def main():
         val_list = f.readlines()
     val_list = [l.strip('\n\r') for l in val_list]
     
-    #os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-    os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3"
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    #os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3"
     
     torch.cuda.manual_seed(args.seed)
     
     model = CSRNet()
-    model = nn.DataParallel(model, device_ids=[0,1,2,3])
+    #model = nn.DataParallel(model, device_ids=[0,1,2,3])
     model = model.cuda()
     
     criterion = nn.MSELoss(size_average=False).cuda()
@@ -129,8 +129,8 @@ def train(train_list, model, criterion, optimizer, epoch):
                                      std=[0.229, 0.224, 0.225]),
                    ]), 
                        train=True, 
-                       #seen=model.seen,
-                       seen=0,
+                       seen=model.seen,
+                       #seen=0,
                        batch_size=args.batch_size,
                        num_workers=args.workers),
         batch_size=args.batch_size)
