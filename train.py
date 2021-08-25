@@ -9,6 +9,7 @@ from utils import save_checkpoint
 
 import torch
 import torch.nn as nn
+from torch.nn import DataParallel
 from torch.autograd import Variable
 from torchvision import datasets, transforms
 
@@ -44,7 +45,8 @@ def main():
     args = parser.parse_args()
     args.original_lr = 1e-7
     args.lr = 1e-7
-    args.batch_size    = 1
+    #args.batch_size    = 1
+    args.batch_size    = 4
     args.momentum      = 0.95
     args.decay         = 5*1e-4
     args.start_epoch   = 0
@@ -69,7 +71,7 @@ def main():
     torch.cuda.manual_seed(args.seed)
     
     model = CSRNet()
-    
+    model = nn.DataParallel(model, device_ids=[0,1,2,3])
     model = model.cuda()
     
     criterion = nn.MSELoss(size_average=False).cuda()
@@ -125,7 +127,8 @@ def train(train_list, model, criterion, optimizer, epoch):
                                      std=[0.229, 0.224, 0.225]),
                    ]), 
                        train=True, 
-                       seen=model.seen,
+                       #seen=model.seen,
+                       seen=0,
                        batch_size=args.batch_size,
                        num_workers=args.workers),
         batch_size=args.batch_size)
