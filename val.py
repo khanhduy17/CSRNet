@@ -23,8 +23,8 @@ transform=transforms.Compose([
                                      std=[0.229, 0.224, 0.225]),
                    ])
 
+'''
 path_sets = ['/content/drive/MyDrive/CSRNet/CSR_Data_Test/images/Shibuya_Live_Camera']
-save_folder = './results'
 img_paths = []
 for path in path_sets:
     for root, _, files in os.walk(path):
@@ -32,15 +32,21 @@ for path in path_sets:
             if filename.endswith(".jpg") :
                 img_paths.append(os.path.join(root, filename))
                 #print(os.path.join(root, filename))
-
+'''
+test_list = 'test_img_list.txt'
+with open(test_list) as f:
+   img_paths = f.readlines()
+img_paths = [p.strip('\n\r') for p in img_paths]
+                
 checkpoints_dir = './'
+save_folder = './results'
 
 model = CSRNet()
 model = model.cuda()
 checkpoint = torch.load(os.path.join(checkpoints_dir, '0model_best.pth.tar'))
 model.load_state_dict(checkpoint['state_dict'])
 mae = 0
-for i in range(5): #range(len(img_paths)):  
+for i in range(len(img_paths)):  
     #img = 255.0 * F.to_tensor(Image.open(img_paths[i]).convert('RGB'))
 
     #img[0,:,:]=img[0,:,:]-92.8207477031
