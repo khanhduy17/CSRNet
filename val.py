@@ -36,7 +36,7 @@ for path in path_sets:
 test_list = 'test_img_list.txt'
 with open(test_list) as f:
    img_paths = f.readlines()
-img_paths = [p.strip('\n\r') for p in img_paths]
+img_paths = ['../dataset/images/' + p.strip('\n\r') for p in img_paths]
                 
 checkpoints_dir = './'
 save_folder = './results'
