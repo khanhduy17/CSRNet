@@ -8,10 +8,13 @@ root = '../FaceMaskProject/'
 path_sets = ['../FaceMaskProject/dataset']
 
 img_paths = []
+file_count = 0
 for path in path_sets:
     for root, _, files in os.walk(path):
         for filename in files:
             if filename.endswith(".jpg") :
+                file_count = file_count + 1
+                print(file_count)
                 img_path = os.path.join(root, filename)
                 gt_path = img_path.replace('.jpg','.h5').replace('images','ground_truth')
                 if os.path.exists(gt_path):
@@ -23,6 +26,7 @@ for path in path_sets:
                 if not os.path.exists(img_path.replace('.jpg','.mat').replace('images','ground_truth')):
                     continue
                 img_paths.append(img_path)
+                
                 
 result_filename = 'image_list.txt'
 with open(result_filename, 'w') as result_file:
