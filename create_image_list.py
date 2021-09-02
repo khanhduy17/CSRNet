@@ -1,5 +1,7 @@
 import os
 import glob
+import numpy as np
+import h5py
 
 
 root = '../FaceMaskProject/'
@@ -11,8 +13,13 @@ for path in path_sets:
         for filename in files:
             if filename.endswith(".jpg") :
                 img_path = os.path.join(root, filename)
-                if os.path.exists(img_path.replace('.jpg','.h5').replace('images','ground_truth')):
-                    continue
+                gt_path = img_path.replace('.jpg','.h5').replace('images','ground_truth')
+                if os.path.exists(gt_path):
+                    gt_file = h5py.File(gt_path)
+                    if len(list(gt_file.keys()))==1:
+                        continue
+                    else:
+                        os.remove(gt_path)
                 if not os.path.exists(img_path.replace('.jpg','.mat').replace('images','ground_truth')):
                     continue
                 img_paths.append(img_path)
